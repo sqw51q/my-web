@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的恋爱日记</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-heart"></i>
+                <span>我们的恋爱日记</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-section="home"><i class="fas fa-home"></i> 首页</a>
+                <a href="#photos" class="nav-link" data-section="photos"><i class="fas fa-images"></i> 相册</a>
+                <a href="#meetings" class="nav-link" data-section="meetings"><i class="fas fa-calendar-alt"></i> 见面记录</a>
+                <a href="#wishes" class="nav-link" data-section="wishes"><i class="fas fa-star"></i> 愿望清单</a>
+                <a href="#secrets" class="nav-link" data-section="secrets"><i class="fas fa-tree"></i> 小树洞</a>
+                <a href="#daily" class="nav-link" data-section="daily"><i class="fas fa-sun"></i> 日常分享</a>
+            </div>
+            <div class="user-info">
+                <span id="current-user">👫 我们俩</span>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 首页 -->
+            <section id="home" class="section active">
+                <div class="welcome-section">
+                    <h1><i class="fas fa-heart"></i> 欢迎来到我们的恋爱空间</h1>
+                    <p class="subtitle">记录我们的点点滴滴，珍藏每一刻美好</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-camera"></i>
+                            <h3 id="photo-count">0</h3>
+                            <p>张照片</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-handshake"></i>
+                            <h3 id="meeting-count">0</h3>
+                            <p>次见面</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-star"></i>
+                            <h3 id="wish-count">0</h3>
+                            <p>个愿望</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-comment-dots"></i>
+                            <h3 id="secret-count">0</h3>
+                            <p>条树洞消息</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h2><i class="fas fa-bolt"></i> 快速操作</h2>
+                        <div class="action-buttons">
+                            <button class="action-btn" data-section="photos">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>上传照片</span>
+                            </button>
+                            <button class="action-btn" data-section="meetings">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>记录见面</span>
+                            </button>
+                            <button class="action-btn" data-section="wishes">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>添加愿望</span>
+                            </button>
+                            <button class="action-btn" data-section="daily">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>分享日常</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 相册 -->
+            <section id="photos" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-images"></i> 我们的相册</h2>
+                    <p>珍藏我们美好的瞬间</p>
+                </div>
+
+                <div class="upload-area">
+                    <div class="upload-box" id="uploadBox">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>点击选择照片或拖拽到这里</h3>
+                        <p>支持 JPG, PNG 格式，最大 5MB</p>
+                        <input type="file" id="photoInput" accept="image/*" multiple style="display: none;">
+                        <button class="upload-btn" id="uploadBtn">选择照片</button>
+                    </div>
+                </div>
+
+                <div class="photos-grid" id="photosGrid">
+                    <!-- 照片会动态加载到这里 -->
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <p>还没有照片，快上传第一张吧！</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 见面记录 -->
+            <section id="meetings" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-alt"></i> 见面记录</h2>
+                    <p>记录我们每一次见面的美好时光</p>
+                </div>
+
+                <div class="form-card">
+                    <h3><i class="fas fa-plus-circle"></i> 添加新的见面记录</h3>
+                    <form id="meetingForm">
+                        <div class="form-group">
+                            <label for="meetingDate"><i class="fas fa-calendar-day"></i> 见面日期</label>
+                            <input type="date" id="meetingDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingActivities"><i class="fas fa-list-check"></i> 做了什么</label>
+                            <textarea id="meetingActivities" rows="3" placeholder="例如：一起看电影、吃火锅、散步..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingFeelings"><i class="fas fa-heart"></i> 感受与感想</label>
+                            <textarea id="meetingFeelings" rows="3" placeholder="写下这次见面的感受..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i> 保存记录
+                        </button>
+                    </form>
+                </div>
+
+                <div class="meetings-list" id="meetingsList">
+                    <!-- 见面记录会动态加载到这里 -->
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>还没有见面记录，快添加第一条吧！</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 愿望清单 -->
+            <section id="wishes" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> 愿望清单</h2>
+                    <p>下次见面想一起做的事</p>
+                </div>
+
+                <div class="form-card">
+                    <h3><i class="fas fa-plus-circle"></i> 添加新愿望</h3>
+                    <form id="wishForm">
+                        <div class="form-group">
+                            <label for="wishTitle"><i class="fas fa-bullseye"></i> 愿望内容</label>
+                            <input type="text" id="wishTitle" placeholder="例如：一起去海边看日出" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="wishPriority"><i class="fas fa-flag"></i> 优先级</label>
+                            <select id="wishPriority">
+                                <option value="low">低</option>
+                                <option value="medium" selected>中</option>
+                                <option value="high">高</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-plus"></i> 添加愿望
+                        </button>
+                    </form>
+                </div>
+
+                <div class="wishes-grid" id="wishesGrid">
+                    <!-- 愿望会动态加载到这里 -->
+                    <div class="empty-state">
+                        <i class="fas fa-star"></i>
+                        <p>还没有愿望，快添加第一个吧！</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 小树洞 -->
+            <section id="secrets" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-tree"></i> 小树洞</h2>
+                    <p>悄悄写下你想说的话</p>
+                </div>
+
+                <div class="form-card">
+                    <h3><i class="fas fa-feather"></i> 写一条树洞消息</h3>
+                    <form id="secretForm">
+                        <div class="form-group">
+                            <label for="secretAuthor"><i class="fas fa-user"></i> 署名 (可选)</label>
+                            <input type="text" id="secretAuthor" placeholder="可以留空或写昵称">
+                        </div>
+                        <div class="form-group">
+                            <label for="secretContent"><i class="fas fa-comment"></i> 想说的话</label>
+                            <textarea id="secretContent" rows="4" placeholder="写下你想说的话..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> 放入树洞
+                        </button>
+                    </form>
+                </div>
+
+                <div class="secrets-list" id="secretsList">
+                    <!-- 树洞消息会动态加载到这里 -->
+                    <div class="empty-state">
+                        <i class="fas fa-tree"></i>
+                        <p>树洞还空空的，快写下第一条消息吧！</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 日常分享 -->
+            <section id="daily" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-sun"></i> 日常分享</h2>
+                    <p>记录每一天的小确幸</p>
+                </div>
+
+                <div class="form-card">
+                    <h3><i class="fas fa-plus-circle"></i> 分享今天的生活</h3>
+                    <form id="dailyForm">
+                        <div class="form-group">
+                            <label for="dailyDate"><i class="fas fa-calendar-day"></i> 日期</label>
+                            <input type="date" id="dailyDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dailyAuthor"><i class="fas fa-user"></i> 分享者</label>
+                            <input type="text" id="dailyAuthor" placeholder="你的名字" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dailyContent"><i class="fas fa-pencil-alt"></i> 今天做了什么/有什么感想</label>
+                            <textarea id="dailyContent" rows="4" placeholder="分享今天的生活..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-share"></i> 分享日常
+                        </button>
+                    </form>
+                </div>
+
+                <div class="daily-list" id="dailyList">
+                    <!-- 日常分享会动态加载到这里 -->
+                    <div class="empty-state">
+                        <i class="fas fa-sun"></i>
+                        <p>还没有日常分享，快分享第一条吧！</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>❤️ 我们的恋爱日记 | 记录每一刻美好 | 数据保存在本地浏览器中</p>
+            <p class="footer-note">提示：数据保存在当前设备，如需备份请导出数据</p>
+            <div class="footer-actions">
+                <button id="exportBtn" class="footer-btn"><i class="fas fa-download"></i> 导出数据</button>
+                <button id="importBtn" class="footer-btn"><i class="fas fa-upload"></i> 导入数据</button>
+                <button id="clearBtn" class="footer-btn danger"><i class="fas fa-trash"></i> 清空数据</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="photoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <p id="modalDate"></p>
+                <button id="deletePhotoBtn" class="danger-btn"><i class="fas fa-trash"></i> 删除照片</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
